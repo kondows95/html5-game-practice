@@ -3,7 +3,7 @@ import { fallingImages, groundImage } from './images';
 
 const PIXCEL_SIZE = 4;
 
-export const SCENE_KEY = 'GameScene';
+export const GAME_SCENE_KEY = 'GameScene';
 
 export class GameScene extends Scene {
   emitInterval: number = 1000;
@@ -15,7 +15,7 @@ export class GameScene extends Scene {
   halfItemSize: number =  PIXCEL_SIZE * groundImage.length / 2;
 
   constructor() {
-    super({ key: SCENE_KEY });
+    super({ key: GAME_SCENE_KEY });
   }
 
   init() {
@@ -25,11 +25,11 @@ export class GameScene extends Scene {
   }
 
   preload() {
-    console.log('###GameScene:2 preload()');
-    for (let i=0; i<fallingImages.length; i++) {
-      this.textures.generate('img'+i.toString(), { data: fallingImages[i], pixelWidth: PIXCEL_SIZE });
-    }
-    this.textures.generate('ground', { data: groundImage, pixelWidth: PIXCEL_SIZE });
+    //console.log('###GameScene:2 preload()');
+    //for (let i=0; i<fallingImages.length; i++) {
+    //  this.textures.generate('img'+i.toString(), { data: fallingImages[i], pixelWidth: PIXCEL_SIZE });
+    //}
+    //this.textures.generate('ground', { data: groundImage, pixelWidth: PIXCEL_SIZE });
   }
 
   create() {
@@ -48,7 +48,8 @@ export class GameScene extends Scene {
 
     this.ground.refresh();
 
-    this.scene.pause();
+    //this.scene.pause();
+    //console.log('create.pause')
   }
 
   update(time: number) {
@@ -71,6 +72,7 @@ export class GameScene extends Scene {
   }
 
   private emitItem() {
+    console.log('update.emitItem')
     const x = Mathematics.Between(this.halfItemSize+4, this.canvasWidth-this.halfItemSize-4);
     const y = 0;
 
@@ -90,9 +92,10 @@ export class GameScene extends Scene {
       this.time.delayedCall(
         100,
         this.destroyItem(item, () => {
-          console.log('###4 GAMEOVER!!! (destroy)');
+          console.log('###4 GAMEOVER!!!');
           this.game.events.emit('onGameOver');
-          this.game.destroy(false);
+          //this.game.destroy(false);
+          this.scene.pause();
         }),
         [item],
         this

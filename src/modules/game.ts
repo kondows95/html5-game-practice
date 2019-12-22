@@ -17,6 +17,7 @@ export default (state: GameState = initialState, action: AnyAction): GameState =
         score: action.payload
       };
     case 'GAME_SET_MODE':
+      console.log('GAME_SET_MODE', action.payload)
       return {
         ...state,
         mode: action.payload

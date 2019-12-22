@@ -46,57 +46,55 @@ type Props = {
 const GamePage: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const handleClickStart = () => {
-    props.setMode(Mode.Playing);
-  };
+  const getScoreLabel = (props: Props) : React.ReactElement | null => {
+    if (props.mode === Mode.Title) { return null; }
+    return (
+      <Box display="flex" className={classes.scoreContainer}>
+        <Box fontWeight={600}>Score: {props.score}</Box>
+      </Box>
+    );
+  }
 
-  const handleClickRetry = () => {
-    props.setMode(Mode.Retry);
-  };
+  const getTitleLabel = (props: Props) : React.ReactElement | null => {
+    if (props.mode === Mode.Playing) { return null; }
 
-  const getLabelComponent = (props: Props) => {
-    switch (props.mode) {
-      case Mode.Playing:
-      case Mode.Retry:
-        return (
-          <Box display="flex" className={classes.scoreContainer}>
-            <Box fontWeight={600}>Score: {props.score}</Box>
-          </Box>
-        );
-      default:
-        //for Mode.Title
-        let buttonLabel = "START";
-        let mainText = "Tap falling objects.";
-        let callback = handleClickStart;
-        if (props.mode === Mode.GameOver) {
-          //for Mode.GameOver
-          buttonLabel = "RETRY";
-          mainText = "GAME OVER";
-          callback = handleClickRetry;
-        }
-        return (
-          <Box display="flex" flexDirection="column" className={classes.titleContainer}>
-            <Box p={2} fontSize="h4.fontSize" fontWeight={800}>{mainText}</Box>
-            <Box my={1}>
-              <Button
-                size="large"
-                variant="contained"
-                color="primary"
-                onClick={callback}
-                className={classes.button}
-              >
-                <Box fontWeight={800}>{buttonLabel}</Box>
-              </Button>
-            </Box>
-          </Box>
-        );
+    //for Mode.Title
+    let buttonLabel = "START";
+    let mainText = "Tap falling objects.";
+    let callback = () => {
+      props.setMode(Mode.Playing);
+    };
+    if (props.mode === Mode.GameOver) {
+      //for Mode.GameOver
+      buttonLabel = "RETRY";
+      mainText = "GAME OVER";
+      callback = () => {
+        props.setMode(Mode.Retry);
+      };
     }
+    return (
+      <Box display="flex" flexDirection="column" className={classes.titleContainer}>
+        <Box p={2} fontSize="h4.fontSize" fontWeight={800}>{mainText}</Box>
+        <Box my={1}>
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            onClick={callback}
+            className={classes.button}
+          >
+            <Box fontWeight={800}>{buttonLabel}</Box>
+          </Button>
+        </Box>
+      </Box>
+    );
   }
   
   return (
     <Box className={classes.rootContainer} bgcolor="red" >
       <GameContainer />
-      {getLabelComponent(props)}
+      {getScoreLabel(props)}
+      {getTitleLabel(props)}
     </Box>
   );
 };
