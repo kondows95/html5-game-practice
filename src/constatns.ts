@@ -1,0 +1,1 @@
+export const GAME_BGCOLOR = '#18216D';
