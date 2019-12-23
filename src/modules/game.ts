@@ -16,12 +16,15 @@ export default (state: GameState = initialState, action: AnyAction): GameState =
         ...state,
         score: action.payload
       };
-    case 'GAME_SET_MODE':
+    case 'GAME_SET_MODE': {
       console.log('GAME_SET_MODE', action.payload)
+      const score = (action.payload as Mode === Mode.Retry) ? 0 : state.score;
       return {
         ...state,
-        mode: action.payload
+        mode: action.payload,
+        score: score,
       };
+    }
     default:
       return state;
   }

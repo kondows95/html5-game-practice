@@ -91,7 +91,7 @@ const GamePage: React.FC<Props> = (props) => {
   }
   
   return (
-    <Box className={classes.rootContainer} bgcolor="red" >
+    <Box className={classes.rootContainer} bgcolor="black" >
       <GameContainer />
       {getScoreLabel(props)}
       {getTitleLabel(props)}
