@@ -1,11 +1,12 @@
-import { Scene, Physics, Actions, Geom, Math as Mathematics } from 'phaser';
+import { Physics, Math as Mathematics } from 'phaser';
 import { fallingImages, groundImage } from './images';
+import { BaseScene } from './BaseScene';
 
 const PIXCEL_SIZE = 4;
 
 export const GAME_SCENE_KEY = 'GameScene';
 
-export class GameScene extends Scene {
+export class GameScene extends BaseScene {
   emitInterval: number = 1000;
   lastEmittedTime: number = 0;
   caught: number = 0;
@@ -16,40 +17,6 @@ export class GameScene extends Scene {
 
   constructor() {
     super({ key: GAME_SCENE_KEY });
-  }
-
-  init() {
-    console.log('###GameScene:1 init()');
-    this.canvasWidth = this.sys.game.canvas.width;
-    this.canvasHeight = this.sys.game.canvas.height;
-  }
-
-  preload() {
-    //console.log('###GameScene:2 preload()');
-    //for (let i=0; i<fallingImages.length; i++) {
-    //  this.textures.generate('img'+i.toString(), { data: fallingImages[i], pixelWidth: PIXCEL_SIZE });
-    //}
-    //this.textures.generate('ground', { data: groundImage, pixelWidth: PIXCEL_SIZE });
-  }
-
-  create() {
-    console.log('###GameScene:3 create()');
-
-    this.ground = this.physics.add.staticGroup({
-      key: 'ground',
-      frameQuantity: Math.ceil(this.canvasWidth / (this.halfItemSize * 2)),
-    });
-
-    const y = this.canvasHeight - this.halfItemSize;
-    Actions.PlaceOnLine(
-      this.ground.getChildren(),
-      new Geom.Line(this.halfItemSize, y, this.halfItemSize + this.canvasWidth, y)
-    );
-
-    this.ground.refresh();
-
-    //this.scene.pause();
-    //console.log('create.pause')
   }
 
   update(time: number) {
