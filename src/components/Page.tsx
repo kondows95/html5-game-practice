@@ -52,7 +52,7 @@ const Page: React.FC<Props> = (props) => {
   const getScoreLabel = (props: Props) : React.ReactElement | null => {
     if (props.mode === Mode.Title) { return null; }
     return (
-      <Box className={classes.scoreContainer} fontSize="h6.fontSize">
+      <Box className={classes.scoreContainer} fontSize="subtitle1.fontSize">
         <Box fontWeight={600}>
           Score: {props.score}   
         </Box>
@@ -79,7 +79,7 @@ const Page: React.FC<Props> = (props) => {
     }
     return (
       <Box flexDirection="column" className={classes.titleContainer}>
-        <Box p={2} fontSize="h3.fontSize" fontWeight={800}>{mainText}</Box>
+        <Box p={2} fontSize="h4.fontSize" fontWeight={800}>{mainText}</Box>
         <Box my={1}>
           <Button
             size="large"
