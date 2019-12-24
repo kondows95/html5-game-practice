@@ -23,6 +23,9 @@ export class BaseScene extends Scene {
       this.textures.generate('img'+i.toString(), { data: fallingImages[i], pixelWidth: PIXCEL_SIZE });
     }
     this.textures.generate('ground', { data: groundImage, pixelWidth: PIXCEL_SIZE });
+
+    this.load.audio("se_ng", ["assets/se_maoudamashii_onepoint14.mp3"]);
+    this.load.audio("se_ok", ["assets/se_maoudamashii_onepoint15.mp3"]);
   }
 
   create() {
@@ -39,5 +42,8 @@ export class BaseScene extends Scene {
     );
 
     this.ground.refresh();
+
+    this.sound.add('se_ok', { volume:0.05 });
+    this.sound.add('se_ng', { volume:0.05 });
   }
 }

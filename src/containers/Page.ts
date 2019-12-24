@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import GamePage from '../components/GamePage';
+import Page from '../components/Page';
 import { AppState, AppDispatch, Mode } from '../types';
 import { setMode } from '../modules/game';
 
@@ -12,4 +12,4 @@ export const mapDispatchToProps = (dispatch: AppDispatch) => ({
   setMode: (mode: Mode) => dispatch(setMode(mode)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
+export default connect(mapStateToProps, mapDispatchToProps)(Page);

@@ -11,17 +11,19 @@ const getCommonLabelContainer = (theme: Theme): any => ({
   width: "100%",
   position: "absolute",
   color: theme.palette.secondary.main,
-  alignItems: "center",
   textShadow: outline,
   zIndex: 2,
+  alignItems: "center",
   justifyContent: "center",
   textAlign: "center",
+  backgroundColor: GAME_BGCOLOR,
 });
 
 const useStyles = makeStyles(theme => ({
   rootContainer: {
     position: "relative",
-    height: "100vh"
+    height: "100vh",
+    backgroundColor: GAME_BGCOLOR,
   },
   titleContainer: {
     ...getCommonLabelContainer(theme),
@@ -30,7 +32,8 @@ const useStyles = makeStyles(theme => ({
   },
   scoreContainer: {
     ...getCommonLabelContainer(theme),
-    top: "2vh",
+    top: "3%",
+    bottom: "97%",
   },
   button: {
     boxShadow: outline
@@ -43,20 +46,22 @@ type Props = {
   setMode: (mode:Mode) => void;
 };
 
-const GamePage: React.FC<Props> = (props) => {
+const Page: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const getScoreLabel = (props: Props) : React.ReactElement | null => {
     if (props.mode === Mode.Title) { return null; }
     return (
-      <Box display="flex" className={classes.scoreContainer}>
-        <Box fontWeight={600}>Score: {props.score}</Box>
+      <Box className={classes.scoreContainer} fontSize="h6.fontSize">
+        <Box fontWeight={600}>
+          Score: {props.score}   
+        </Box>
       </Box>
     );
   }
 
   const getTitleLabel = (props: Props) : React.ReactElement | null => {
-    if (props.mode === Mode.Playing) { return null; }
+    if (props.mode === Mode.Playing || props.mode === Mode.Retry) { return null; }
 
     //for Mode.Title
     let buttonLabel = "START";
@@ -73,8 +78,8 @@ const GamePage: React.FC<Props> = (props) => {
       };
     }
     return (
-      <Box display="flex" flexDirection="column" className={classes.titleContainer}>
-        <Box p={2} fontSize="h4.fontSize" fontWeight={800}>{mainText}</Box>
+      <Box flexDirection="column" className={classes.titleContainer}>
+        <Box p={2} fontSize="h3.fontSize" fontWeight={800}>{mainText}</Box>
         <Box my={1}>
           <Button
             size="large"
@@ -91,7 +96,7 @@ const GamePage: React.FC<Props> = (props) => {
   }
   
   return (
-    <Box className={classes.rootContainer} bgcolor="black" >
+    <Box className={classes.rootContainer} bgcolor="GAME_BGCOLOR" >
       <GameContainer />
       {getScoreLabel(props)}
       {getTitleLabel(props)}
@@ -99,4 +104,4 @@ const GamePage: React.FC<Props> = (props) => {
   );
 };
 
-export default GamePage;
+export default Page;

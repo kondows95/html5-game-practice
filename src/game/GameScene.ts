@@ -23,7 +23,7 @@ export class GameScene extends BaseScene {
     const diff: number = time - this.lastEmittedTime;
     if (diff > this.emitInterval) {
       this.lastEmittedTime = time;
-      if (this.emitInterval > 400) {
+      if (this.emitInterval > 380) {
         this.emitInterval -= 20;//speed-up
       }
       this.emitItem();
@@ -46,7 +46,7 @@ export class GameScene extends BaseScene {
     const itemKey = 'img' + Mathematics.Between(0, fallingImages.length-1).toString();
     const item = this.physics.add.image(x, y, itemKey);
 
-    item.setVelocity(0, 200);
+    item.setVelocity(0, 400);
     item.setInteractive();
 
     item.on('pointerdown', this.onPointerDown(item), this);
@@ -56,12 +56,12 @@ export class GameScene extends BaseScene {
   private onCollide(item: Physics.Arcade.Image) {
     return () => {
       item.setTint(0xff0000);
+      this.sound.play("se_ng");
       this.time.delayedCall(
         100,
         this.destroyItem(item, () => {
           console.log('###4 GAMEOVER!!!');
           this.game.events.emit('onGameOver');
-          //this.game.destroy(false);
           this.scene.pause();
         }),
         [item],
@@ -76,6 +76,7 @@ export class GameScene extends BaseScene {
       item.setVelocity(0, 0);
       this.caught += 1;
       this.game.events.emit('onCaught', this.caught);
+      this.sound.play("se_ok");
       this.time.delayedCall(
         100,
         this.destroyItem(item),

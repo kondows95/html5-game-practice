@@ -59,7 +59,7 @@ const GameContainer: React.FC<Props> = (props) => {
     if (game === null) { return; }
     switch (props.mode) {
       case Mode.Playing:
-        game.scene.start(GAME_SCENE_KEY)
+        game.scene.start(GAME_SCENE_KEY);
         break;
       case Mode.Retry:
         game.scene.remove(GAME_SCENE_KEY);
