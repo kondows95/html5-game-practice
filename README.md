@@ -1,10 +1,10 @@
-## This is a practice game used at the HTML5 game development study session.  
+### This is a practice game used at the HTML5 game development study session.  
 
-## See the following article for details.
+### See the following article for details.
 https://medium.com/@tsubasakondo_36683/html5-game-development-study-session-1-58086206f03e
 
 
-## This project uses the following technologies:  
+### This project uses the following technologies:  
 - Typescript
 - React
 - Redux
@@ -13,7 +13,7 @@ https://medium.com/@tsubasakondo_36683/html5-game-development-study-session-1-58
 - Phaser3
 - AWS.Amplify
 
-## How to install is as follows.
+### How to install is as follows.
 ```
 git clone https://github.com/kondows95/html5-game-practice.git
 yarn
