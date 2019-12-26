@@ -96,7 +96,7 @@ const Page: React.FC<Props> = (props) => {
   }
   
   return (
-    <Box className={classes.rootContainer} bgcolor="GAME_BGCOLOR" >
+    <Box className={classes.rootContainer} bgcolor={GAME_BGCOLOR} >
       <GameContainer />
       {getScoreLabel(props)}
       {getTitleLabel(props)}

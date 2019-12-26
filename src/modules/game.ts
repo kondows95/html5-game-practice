@@ -31,13 +31,8 @@ export default (state: GameState = initialState, action: AnyAction): GameState =
 };
 
 //=============================================================================
-//Actions
+//Action creators
 //=============================================================================
-/*export type Actions = ReturnType<
-  | typeof setScore 
-  | typeof setMode
->*/
-
 export const setScore = (value: number) => ({
   type: 'GAME_SET_CURRENT_SCORE',
   payload: value
