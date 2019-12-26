@@ -16,6 +16,7 @@ https://medium.com/@tsubasakondo_36683/html5-game-development-study-session-1-58
 ### How to install is as follows.
 ```
 git clone https://github.com/kondows95/html5-game-practice.git
+cd html5-game-practice
 yarn
 yarn start
 ```
